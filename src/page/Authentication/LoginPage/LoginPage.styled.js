@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Form, Field} from 'formik';
+import { Form, Field, ErrorMessage } from 'formik';
 
 export const Box = styled.div`
 	width: 100%;
@@ -8,7 +8,7 @@ export const Box = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
-export const HelpText = styled.span`
+export const HelpText = styled(ErrorMessage)`
 	font-weight: ${(props) => props.theme.fontWeights.n};
 	font-size: ${(props) => props.theme.fontSizes.s};
 	line-height: ${(props) => props.theme.lineHeights.authInput};

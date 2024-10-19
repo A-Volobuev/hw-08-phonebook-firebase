@@ -1,5 +1,5 @@
 import React  from 'react';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Box, FormBox, FormButton, FormTitle, InputBox, InputContainer, InputField, InputLabel, HelpText} from './RegisterPage.styled';
 import { useDispatch } from 'react-redux';
@@ -12,12 +12,12 @@ const initialValues = {
 };
 
 let schema = Yup.object().shape({
-  name: Yup.string().min(4).max(32).required(),
-	email: Yup.string().email('Invalid email').required('Email is required'), 
+  name: Yup.string().min(4).max(32).required('Минимум 4 символа'),
+	email: Yup.string().email('Invalid email').required('Например: example@gmail.com'), 
 	password: Yup.string()
 		.min(4, 'Password must be at least 4 characters')
 		.max(16, 'Password must be 16 characters or less')
-		.required('Password is required'),
+		.required('Минимум 4 символа'),
 });
 
 
@@ -51,8 +51,7 @@ export const RegisterPage = () => {
 						type="email"
 						placeholder="Enter email"
 						/>
-						<ErrorMessage name="email" component="div" style={{ color: 'red' }} />
-						<HelpText>Формат почты Example@gmail.com</HelpText>
+						<HelpText name="email" component="div" style={{ color: 'red' }} />
 					</InputContainer>
 					<InputContainer>
 						<InputLabel>User name</InputLabel>
@@ -62,8 +61,8 @@ export const RegisterPage = () => {
 						type="text"
 						placeholder="Enter user name"
 						/>
-						<ErrorMessage name="name" component="div" style={{ color: 'red' }} />
-            <HelpText>Минимум 4 символа</HelpText>
+						<HelpText name="name" component="div" style={{ color: 'red' }}>
+						</HelpText>
 					</InputContainer>
 					<InputContainer>
 						<InputLabel>Password</InputLabel>
@@ -73,8 +72,7 @@ export const RegisterPage = () => {
 						type="password"
 						placeholder="Enter password"
 						/>
-						<ErrorMessage name="password" component="div" style={{ color: 'red' }} />
-            <HelpText>Минимум 6 символов, максимум 16</HelpText>
+						<HelpText name="password" component="div" style={{ color: 'red' }} />
 					</InputContainer>
 				</InputBox>
 
