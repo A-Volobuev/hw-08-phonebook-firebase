@@ -2,6 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { auth } from '../../firebase'; // Импортируйте вашу конфигурацию Firebase
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from 'firebase/auth';
+import Notiflix from 'notiflix';
 
 const token = {
   set(token) {
@@ -43,6 +44,7 @@ const register = createAsyncThunk('auth/register', async (credentials) => {
 			return { ...user, displayName: credentials.name };
 	} catch (error) {
 			console.error("Ошибочка:", error);
+			Notiflix.Notify.failure('Что то пошло не так');
 			throw error;
 	}
 });
@@ -80,6 +82,7 @@ const logIn = createAsyncThunk('auth/login', async (credentials) => {
 			return user; 
 	} catch (error) {
 			console.error("Ошибочка:", error);
+			Notiflix.Notify.failure('Что то пошло не так');
 			throw error;
 	}
 });
@@ -101,6 +104,7 @@ const logOut = createAsyncThunk('auth/logout', async () => {
 		token.unset();
 	} catch (error) {
 		console.log(error);
+		Notiflix.Notify.failure('Что то пошло не так');
 	}
 })
 

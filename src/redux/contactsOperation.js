@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import Notiflix from 'notiflix';
 
 axios.defaults.baseURL = 'https://6703e73dab8a8f8927321cf7.mockapi.io'
 
@@ -10,6 +11,7 @@ export const fetchContacts = createAsyncThunk(
 			const contacts = await axios.get('/contacts');
 			return contacts.data;
 		} catch (error) {
+			Notiflix.Notify.failure('Что то пошло не так');
 			return rejectWithValue(error);
 		}
 	}
@@ -22,6 +24,7 @@ export const addContacts = createAsyncThunk(
 			const {data} = await axios.post('/contacts', contact);
 			return data;
 		} catch (error) {
+			Notiflix.Notify.failure('Что то пошло не так');
 			return rejectWithValue(error);
 		}
 	}
@@ -34,6 +37,7 @@ export const removeContacts = createAsyncThunk(
 			await axios.delete(`/contacts/${id}`);
 			return id;
 		} catch (error) {
+			Notiflix.Notify.failure('Что то пошло не так');
 			return rejectWithValue(error);
 		}
 	}
@@ -46,6 +50,7 @@ export const editContacts = createAsyncThunk(
       const { data } = await axios.put(`/contacts/${id}`, updateContact);
       return data;
     } catch (error) {
+			Notiflix.Notify.failure('Что то пошло не так');
       return rejectWithValue(error);
     }
   }
